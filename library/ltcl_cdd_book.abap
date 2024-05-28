@@ -1,7 +1,6 @@
 *"* use this source file for your ABAP unit test classes
-class ltcl_cdd_book definition final for testing
-  duration short
-  risk level harmless.
+CLASS ltcl_cdd_book DEFINITION FINAL
+  FOR TESTING RISK LEVEL HARMLESS DURATION SHORT.
 
   private section.
 

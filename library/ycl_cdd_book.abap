@@ -4,25 +4,22 @@ CLASS ycl_cdd_book DEFINITION
   CREATE PUBLIC .
 
   PUBLIC SECTION.
-
     METHODS constructor
-        importing   p_title type string
-                    p_pages type i
-                    p_author type string.
+      IMPORTING p_title  TYPE string
+                p_pages  TYPE i
+                p_author TYPE string.
 
     METHODS get_title
-     RETURNING
-        value(r_result) TYPE string.
+      RETURNING VALUE(r_result) TYPE string.
 
-    methods get_pages
-        RETURNING
-        value(r_result) type i.
+    METHODS get_pages
+      RETURNING VALUE(r_result) TYPE i.
+
     METHODS get_author
-      RETURNING
-        value(r_result) TYPE string.
+      RETURNING VALUE(r_result) TYPE string.
+
     METHODS short_description
-      RETURNING
-        value(r_result) TYPE string.
+      RETURNING VALUE(r_result) TYPE string.
 
   PROTECTED SECTION.
 
