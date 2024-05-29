@@ -7,7 +7,8 @@ CLASS ycl_cdd_book DEFINITION
     METHODS constructor
       IMPORTING p_title  TYPE string
                 p_pages  TYPE i
-                p_author TYPE string.
+                p_author TYPE string
+                p_published TYPE i.
 
     METHODS get_title
       RETURNING VALUE(r_result) TYPE string.
@@ -25,6 +26,7 @@ CLASS ycl_cdd_book DEFINITION
         value(r_result) TYPE i.
     METHODS add_book.
     METHODS borrow_book.
+    METHODS return_book.
 
   PROTECTED SECTION.
 
@@ -33,9 +35,8 @@ CLASS ycl_cdd_book DEFINITION
     DATA m_pages type i.
     DATA m_author TYPE string.
     DATA m_available_books TYPE i.
+    DATA m_published TYPE i.
 ENDCLASS.
-
-
 
 CLASS ycl_cdd_book IMPLEMENTATION.
 
@@ -51,6 +52,7 @@ CLASS ycl_cdd_book IMPLEMENTATION.
     m_title = p_title.
     m_pages = p_pages.
     m_author = p_author.
+    m_published = p_published.
     m_available_books = 0.
   ENDMETHOD.
 
@@ -58,24 +60,26 @@ CLASS ycl_cdd_book IMPLEMENTATION.
     r_result = m_author.
   ENDMETHOD.
 
-
   METHOD short_description.
-        r_result = |{ m_title } is a { m_pages } page book by { m_author }.|.
+        r_result = |{ m_title } is a book by { m_author } first published in { m_published }.|.
   ENDMETHOD.
-
 
   METHOD available_books.
         r_result = m_available_books.
   ENDMETHOD.
 
-
   METHOD add_book.
         m_available_books += 1.
   ENDMETHOD.
 
-
   METHOD borrow_book.
-     m_available_books -= 1.
+    IF m_available_books > 0.
+      m_available_books -= 1.
+    ENDIF.
+  ENDMETHOD.
+
+  METHOD return_book.
+     m_available_books += 1.
   ENDMETHOD.
 
 ENDCLASS.
