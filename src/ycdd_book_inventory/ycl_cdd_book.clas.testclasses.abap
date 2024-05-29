@@ -10,6 +10,9 @@ CLASS ltcl_cdd_book DEFINITION FINAL
     METHODS test_book_title        FOR TESTING RAISING cx_static_check.
     METHODS test_number_pages      FOR TESTING RAISING cx_static_check.
     METHODS test_short_description FOR TESTING RAISING cx_static_check.
+    METHODS test_initial_book_count FOR TESTING RAISING cx_static_check.
+    METHODS test_add_book FOR TESTING RAISING cx_static_check.
+    METHODS test_borrow_book FOR TESTING RAISING cx_static_check.
 
 endclass.
 
@@ -47,8 +50,27 @@ class ltcl_cdd_book implementation.
    act = o_cut->short_description( )
    exp = 'The Hobbit is a 320 page book by Tolkien.'
    ).
-
   endmethod.
 
+  method test_initial_book_count.
+   cl_abap_unit_assert=>assert_equals(
+   act = o_cut->available_books( )
+   exp = 0 ).
+  endmethod.
+
+  method test_add_book.
+   o_cut->add_book( ).
+   cl_abap_unit_assert=>assert_equals(
+   act = o_cut->available_books( )
+   exp = 1 ).
+  endmethod.
+
+  method test_borrow_book.
+    o_cut->add_book( ).
+    o_cut->borrow_book( ).
+    cl_abap_unit_assert=>assert_equals(
+    act = o_cut->available_books( )
+    exp = 0 ).
+  endmethod.
 
 endclass.
