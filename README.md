@@ -6,8 +6,10 @@ Contains katas and other information on ABAP that I use
 > using the Samman method. 
 
 ## Things I need to learn
-- How to lock and unlock files in Eclipse
 - All the navigational shortcuts in Eclipse
+- How does transport requests compare to commits? understand transport requests.
+
+- How to lock and unlock files in Eclipse - there is a shortcut in the menu.
 
 ## how to install it
 Runs in a database, so you need the full system.
