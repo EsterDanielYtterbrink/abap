@@ -15,6 +15,9 @@ CLASS ltcl_cdd_book DEFINITION FINAL
     METHODS test_borrow_book FOR TESTING RAISING cx_static_check.
     METHODS test_return_book FOR TESTING RAISING cx_static_check.
     METHODS test_borrow_unavailable_book FOR TESTING RAISING cx_static_check.
+    METHODS test_reqired_shelf_space FOR TESTING RAISING cx_static_check.
+    METHODS test_reqired_space_two_books FOR TESTING RAISING cx_static_check.
+    METHODS test_space_borrowed_book FOR TESTING RAISING cx_static_check.
 
 endclass.
 
@@ -91,4 +94,29 @@ class ltcl_cdd_book implementation.
     exp = 0 ).
   endmethod.
 
+
+
+  method test_reqired_shelf_space.
+    o_cut->add_book( ).
+    cl_abap_unit_assert=>assert_equals(
+    act = o_cut->required_shelf_space( )
+    exp = 2 ).
+  endmethod.
+
+  method test_reqired_space_two_books.
+    o_cut->add_book( ).
+    o_cut->add_book( ).
+    cl_abap_unit_assert=>assert_equals(
+    act = o_cut->required_shelf_space( )
+    exp = 4 ).
+  endmethod.
+
+  method test_space_borrowed_book.
+    o_cut->add_book( ).
+    o_cut->add_book( ).
+    o_cut->borrow_book( ).
+    cl_abap_unit_assert=>assert_equals(
+    act = o_cut->required_shelf_space( )
+    exp = 4 ).
+  endmethod.
 endclass.

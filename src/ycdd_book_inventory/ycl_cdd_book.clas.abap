@@ -27,6 +27,9 @@ CLASS ycl_cdd_book DEFINITION
     METHODS add_book.
     METHODS borrow_book.
     METHODS return_book.
+    METHODS required_shelf_space
+      RETURNING
+        value(r_result) TYPE i.
 
   PROTECTED SECTION.
 
@@ -35,6 +38,7 @@ CLASS ycl_cdd_book DEFINITION
     DATA m_pages type i.
     DATA m_author TYPE string.
     DATA m_available_books TYPE i.
+    DATA m_total_books TYPE i.
     DATA m_published TYPE i.
 ENDCLASS.
 
@@ -54,6 +58,7 @@ CLASS ycl_cdd_book IMPLEMENTATION.
     m_author = p_author.
     m_published = p_published.
     m_available_books = 0.
+    m_total_books = 0.
   ENDMETHOD.
 
   METHOD get_author.
@@ -70,6 +75,7 @@ CLASS ycl_cdd_book IMPLEMENTATION.
 
   METHOD add_book.
         m_available_books += 1.
+        m_total_books += 1.
   ENDMETHOD.
 
   METHOD borrow_book.
@@ -80,6 +86,11 @@ CLASS ycl_cdd_book IMPLEMENTATION.
 
   METHOD return_book.
      m_available_books += 1.
+  ENDMETHOD.
+
+
+  METHOD required_shelf_space.
+        r_result = 2 * m_total_books.
   ENDMETHOD.
 
 ENDCLASS.
